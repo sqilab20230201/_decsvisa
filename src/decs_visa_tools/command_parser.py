@@ -6,7 +6,7 @@
 
 import time
 
-from .command_dictionary import APS_demo_2024_cmd_uri as cmd_uri
+from .command_dictionary import Proteox_cmd_uri as cmd_uri
 
 def decs_request_parser(cmd: str) -> str:
     """
