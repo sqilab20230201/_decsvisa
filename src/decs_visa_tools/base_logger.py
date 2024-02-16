@@ -19,9 +19,11 @@ if running_on.startswith("Windows"):
     fh.setLevel(logging.DEBUG)
     fh.setFormatter(formatter)
     logger.addHandler(fh)
+    logger.info(f'OS is: {running_on}')
 else:
     # For now, log to console (to allow PIPEd output)
     ch = logging.StreamHandler()
     ch.setLevel(logging.DEBUG)
     ch.setFormatter(formatter)
     logger.addHandler(ch)
+    logger.info(f'OS is: {running_on}')
