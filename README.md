@@ -76,14 +76,14 @@ The `decs_visa_settings.py` file is really only included as a convenience to ens
 ## Operating system
 
 #### Linux and MAC
-When running DECS<->VISA on Linux or MAC outputs are displayed in your working python script as shown in the image below. 
+When running on Linux or MAC, outputs from DECS<->VISA are displayed in your working python script, as shown in the image below. 
 
-![OS_MAC](./img/OS_MAC.jpg)
+![OS_MAC](./img/OS_MAC.png)
 
 #### Windows
-If running on Windows output from the DECS<->VISA are displayed in a `decsvisa.log` file, which will be created in your working directory. If struggling to estblish a connection between DECS<->VISA and oi:DECS, check the information captured in the `decsvisa.log` file.
+When running on Windows, outputs from DECS<->VISA are displayed in a `decsvisa.log` file, which will be created in your working directory. If struggling to estblish a connection between DECS<->VISA and oi:DECS, check the information captured in the `decsvisa.log` file.
 
-![OS_Windows](./img/OS_Windows.jpg)
+![OS_Windows](./img/OS_Windows.png)
 
 ## Details of decs_visa_components 
 
