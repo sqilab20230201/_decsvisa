@@ -54,12 +54,12 @@ Keeping this password in the `.env` file means that this information is kept sep
 
 The `WAMP_ROUTER_URL` should be updated to reflect the network settings for the system installation. In place of `www.xxx.yyy.zzz`, add the IP address of your oiDECS system. The IP address for your system can be found from the 'System' tab on the oi:DECS GUI under 'About'.
 
-All other details in the .env file are not to be changed.
+All other details in the `.env` file are not to be changed.
 
 These details are used by the 'wamp_component' to establish a controlling session on the oi:DECS system.
 
 
-**2. The `decs_visa_tools/decs_visa_settings.py` file** - this contains general settings such as message delimiters and the path of your .env file.
+**2. The `decs_visa_tools/decs_visa_settings.py` file** - this contains general settings such as message delimiters and the path of your `.env` file.
 
 The `decs_visa_settings.py` contains the lines:
 
@@ -67,11 +67,23 @@ The `decs_visa_settings.py` contains the lines:
 # path to the system settings .env file
 DOT_ENV_PATH = ".env"
 ````
-Add the file path of your .env file here. This will allow you to maintain multiple 'dot_env' files, perhaps for different system users, or to communicate with different oi:DECS based systems.
+Add the file path of your `.env` file here. This will allow you to maintain multiple '.env' files, perhaps for different system users, or to communicate with different oi:DECS based systems.
 
 **NB** whilst relative paths can be convenient, this can also be the cause of some subtle problems if `decs_visa` is launched from scripts in different system locations.  In this case an absolute path may be easier to manage. 
 
 The `decs_visa_settings.py` file is really only included as a convenience to ensure consistent settings between DECS<->VISA and the 'client' examples.
+
+## Operating system
+
+#### Linux and MAC
+When running DECS<->VISA on Linux or MAC outputs are displayed in your working python script as shown in the image below. 
+
+![OS_MAC](./img/OS_MAC.jpg)
+
+#### Windows
+If running on Windows output from the DECS<->VISA are displayed in a `decsvisa.log` file, which will be created in your working directory. If struggling to estblish a connection between DECS<->VISA and oi:DECS, check the information captured in the `decsvisa.log` file.
+
+![OS_Windows](./img/OS_Windows.jpg)
 
 ## Details of decs_visa_components 
 
