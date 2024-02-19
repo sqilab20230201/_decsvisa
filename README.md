@@ -64,8 +64,16 @@ These details are used by the 'wamp_component' to establish a controlling sessio
 The `decs_visa_settings.py` contains the lines:
 
 ````python
+#############################################
+#    Configuration settings required     #
+#############################################
+
 # path to the system settings .env file
 DOT_ENV_PATH = ".env"
+# NB this can also be an
+# /absolute/path/to/file/.env
+
+##############################################
 ````
 Add the file path of your `.env` file here. This will allow you to maintain multiple '.env' files, perhaps for different system users, or to communicate with different oi:DECS based systems.
 
