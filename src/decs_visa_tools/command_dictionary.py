@@ -39,6 +39,7 @@ Proteox_cmd_uri = {
     "get_PT2_T1"        : "oi.decs.temperature_control.PTR1_PT2_S.temperature",
     "get_DR1_T"         : "oi.decs.temperature_control.DRI_PT1_S.temperature",
     "get_PT1_T1"        : "oi.decs.temperature_control.PTR1_PT1_S.temperature",
+    "get_3He_F"         : "oi.decs.flow_control.3CL_FM_01.flow",
     "get_OVC_P"         : "oi.decs.proteox.OVC_PG_01.pressure",
     "get_P1_P"          : "oi.decs.proteox.3CL_PG_01.pressure",
     "get_P2_P"          : "oi.decs.proteox.3CL_PG_02.pressure",
