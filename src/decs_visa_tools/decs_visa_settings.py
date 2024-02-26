@@ -7,7 +7,7 @@ Utility module that holds some useful settings
 #############################################
 
 # path to the system settings .env file
-DOT_ENV_PATH = ".env"
+DOT_ENV_PATH = "../../src/qcodes_contrib_drivers/drivers/OxfordInstruments/decsvisa/src/.env"
 # NB this can also be an
 # /absolute/path/to/file/.env
 
