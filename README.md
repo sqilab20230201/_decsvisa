@@ -1,16 +1,16 @@
 # DECS<->VISA
 
-A simple TCP socket server as a WAMP wrapper for communication with oi:DECS based systems.
+A simple TCP socket server as a WAMP wrapper for communication with oi.DECS based systems.
 
 ## Motivation
 
-Given that oi:DECS based systems already expose an API *via* [WAMP](https://wamp-proto.org/) (a WebSocket sub-protocol) which provides multi-user support, authentication, authorisation, both routed remote procedure call (rRPC) and publish-subscribe messaging paradigms, and allows for efficient asynchronous (event-driven) interactions; an obvious question may be: why not just use that?
+Given that oi.DECS based systems already expose an API *via* [WAMP](https://wamp-proto.org/) (a WebSocket sub-protocol) which provides multi-user support, authentication, authorisation, both routed remote procedure call (rRPC) and publish-subscribe messaging paradigms, and allows for efficient asynchronous (event-driven) interactions; an obvious question may be: why not just use that?
 
-In essence, because it is often the case that an oi:DECS based system (such as dilution refrigerator) is used as part of a larger measurement / data acquisition system, often including programmable instruments.  Many of these instruments will conform to standards, such as the Virtual Instrument Software Architecture (VISA).
+In essence, because it is often the case that an oi.DECS based system (such as dilution refrigerator) is used as part of a larger measurement / data acquisition system, often including programmable instruments.  Many of these instruments will conform to standards, such as the Virtual Instrument Software Architecture (VISA).
 
-The intention of the DECS<->VISA interface is to allow 'straightforward' integration of oi:DECS based systems with other instrumentation, or existing measurement automation / data acquisition software that may have been written around the operation of traditional programmable instruments.
+The intention of the DECS<->VISA interface is to allow 'straightforward' integration of oi.DECS based systems with other instrumentation, or existing measurement automation / data acquisition software that may have been written around the operation of traditional programmable instruments.
 
-DECS<->VISA is also the basis for the oi:DECS [QCoDeS](http://microsoft.github.io/Qcodes/) driver.
+DECS<->VISA is also the basis for the oi.DECS [QCoDeS](http://microsoft.github.io/Qcodes/) driver.
 
 ## Concept
 
@@ -52,22 +52,28 @@ Add the system credentials (username and password) to WAMP_USER and WAMP_USER_SE
 
 Keeping this password in the `.env` file means that this information is kept separate from your code - ensure your `.gitignore` file is updated so to not track this/these file(s).  You can create `.env` files from the dummy file template included in the `/src`.
 
-The `WAMP_ROUTER_URL` should be updated to reflect the network settings for the system installation. In place of `www.xxx.yyy.zzz`, add the IP address of your oiDECS system. The IP address for your system can be found from the 'System' tab on the oi:DECS GUI under 'About'.
+The `WAMP_ROUTER_URL` should be updated to reflect the network settings for the system installation. In place of `www.xxx.yyy.zzz`, add the IP address of your oi.DECS system. The IP address for your system can be found from the 'System' tab on the oi.DECS GUI under 'About'.
 
-All other details in the .env file are not to be changed.
-
-These details are used by the 'wamp_component' to establish a controlling session on the oi:DECS system.
+These details are used by the 'wamp_component' to establish a controlling session on the oi.DECS system.
 
 
-**2. The `decs_visa_tools/decs_visa_settings.py` file** - this contains general settings such as message delimiters and the path of your .env file.
+**2. The `decs_visa_tools/decs_visa_settings.py` file** - this contains general settings such as message delimiters and the path of your `.env` file.
 
 The `decs_visa_settings.py` contains the lines:
 
 ````python
+#############################################
+#     Configuration settings required       #
+#############################################
+
 # path to the system settings .env file
 DOT_ENV_PATH = ".env"
+# NB this can also be an
+# /absolute/path/to/file/.env
+
+##############################################
 ````
-Add the file path of your .env file here. This will allow you to maintain multiple 'dot_env' files, perhaps for different system users, or to communicate with different oi:DECS based systems.
+Add the file path of your `.env` file here. This will allow you to maintain multiple '.env' files, perhaps for different system users, or to communicate with different oi.DECS based systems.
 
 **NB** whilst relative paths can be convenient, this can also be the cause of some subtle problems if `decs_visa` is launched from scripts in different system locations.  In this case an absolute path may be easier to manage. 
 
@@ -77,7 +83,7 @@ The `decs_visa_settings.py` file is really only included as a convenience to ens
 
 #### The WAMP component
 
-The wamp_component runs the WAMP messaging loop.  In order for the DECS<->VISA to provide control over the oi:DECS system it much establish a 'controlling session'.  The wamp_component first attempts this, and if this fails will close DECS<->VISA.  The logging should provide details of why this failed:
+The wamp_component runs the WAMP messaging loop.  In order for the DECS<->VISA to provide control over the oi.DECS system it much establish a 'controlling session'.  The wamp_component first attempts this, and if this fails will close DECS<->VISA.  The logging should provide details of why this failed:
 
 e.g. Unknown user
 ````
@@ -131,7 +137,7 @@ SERVER_PORT="33576"
 ````
 `SERVER_PORT` is the port on which the server will listen.  `BIND_SERVER_TO_INTERFACE` controls where the server will listen.  This value is set to `localhost` (i.e. the loopback interface `127.0.0.1`) as a security measure.  This means the server will only accept connections from the machine on which DECS<->VISA is running (and established / authenticated the WAMP connection from).
 
-**_Caveat utilitor_:** It is possible to accept general network traffic if this value is changed to `""` but the price paid for that convenience is the possibility of an unwanted to connection that can send control commands to oi:DECS.
+**_Caveat utilitor_:** It is possible to accept general network traffic if this value is changed to `""` but the price paid for that convenience is the possibility of an unwanted to connection that can send control commands to oi.DECS.
 
 The server waits for messages to arrive from the socket connection.  Once this happens the message is placed onto a queue to be consumed by the wamp_component.
 
@@ -149,7 +155,7 @@ INFO - Client disconnected
 INFO - Server connection: ('127.0.0.1', 53570)
 ````
 
-The server is configured to accept only one connection at any time, but note, multiple instances of DECS<->VISA could be running on a single machine (each connecting to different oi:DECS based systems).  In this case the `.env` files for each instance should be updated to ensure that each socket server is exposing a unique port.
+The server is configured to accept only one connection at any time, but note, multiple instances of DECS<->VISA could be running on a single machine (each connecting to different oi.DECS based systems).  In this case the `.env` files for each instance should be updated to ensure that each socket server is exposing a unique port.
 
 **_Caveat utilitor_:** In this configuration users should be sure they are connecting to the correct system - the `*IDN?` query could be useful here!
 
@@ -184,7 +190,7 @@ If you wish to extend the functionality of the system to accommodate additional 
 
 ### The command dictionary
 
-Most oi:DECS systems expose a large number of WAMP uris - many of which may not be required to automate a measurement.
+Most oi.DECS systems expose a large number of WAMP uris - many of which may not be required to automate a measurement.
 
 The file `command_dictionary.py` contains a (set of) dictionaries that can map 'friendly' command aliases to full WAMP uris, e.g.
 
@@ -233,6 +239,7 @@ class OIRecordType(IntEnum):
     types to be accessed as enum values"""
     TEMPERATURE = 0
     PRESSURE = 10
+    ...
 ````
 
 An attempt is made to match the message response type against this enum. 
@@ -240,6 +247,7 @@ An attempt is made to match the message response type against this enum.
 ````python
 match data_record_type:
     case  OIRecordType.TEMPERATURE
+    ...
 ````
 
 And depending of the message type, the item(s) of most interest are packaged as a string to be returned by the socket_server to the client.
@@ -276,7 +284,7 @@ DEBUG - Forwarding Server Sending: 4.0
 
 ### Example client
 
-The `client_example.py` file has a simple TCP/IP client based on the `PyVISA` package that can be used to communicate with DECS<->VISA as a demonstration of how the oi:DECS system could be integrated with a typical VISA based automated measurement system.
+The `client_example.py` file has a simple TCP/IP client based on the `PyVISA` package that can be used to communicate with DECS<->VISA as a demonstration of how the oi.DECS system could be integrated with a typical VISA based automated measurement system.
 
 As a result, this example will likely be familiar to anybody who has used the programmable interface of any VISA type instrument.
 
@@ -313,7 +321,7 @@ pyvisa_connection = f"TCPIP0::{decs_visa_server_ip}::{decs_visa_server_port}::SO
 From the client_example the output should be a set of command and response pairs:
 
 ```
-*IDN? => Oxford Instruments, oi:DECS, decs-442a7b, 0.6.0.2338
+*IDN? => Oxford Instruments, oi.DECS, decs-442a7b, 0.6.0.2338
 get_PT2_T1 => 292.9033
 set_MC_T:4 => 4.0
 ...
@@ -330,3 +338,19 @@ The file `notebook_example.ipynb` contains an example of working with DECS<->VIS
 Details of this are included in that file directly.
 
 ![Notebook](./img/Notebook.jpg)
+
+#### Operating system
+
+
+##### Linux and MAC
+
+When running on Linux or MAC, outputs from DECS<->VISA subprocess are displayed (piped) in the notebook directly, as shown in the image below. 
+
+![OS_MAC](./img/OS_MAC.png)
+
+##### Windows
+
+When running on Windows, outputs from DECS<->VISA are stored in a `decs_visa.log` file, which will be created in your working directory. If struggling to establish a connection between DECS<->VISA and oi.DECS, check the information captured in the `decs_visa.log` file.
+
+![OS_Windows](./img/OS_Windows.png)
+
