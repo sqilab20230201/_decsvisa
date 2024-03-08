@@ -34,9 +34,9 @@ Where the exact details will depend on your OS / python environment etc.
 
 ## Configuration
 
-There are two places information is stored that requires configuring for your oiDECS system.
+There are two places information is stored that requires configuring for your oi.DECS system.
 
-**1. The `.env` file inside the `/src` folder** - this contains "secret" information such as system login details. These details must be correct to establish a WAMP session on the oiDECS system.
+**1. The `.env` file inside the `/src` folder** - this contains "secret" information such as system login details. These details must be correct to establish a WAMP session on the oi.DECS system.
 
 ````bash
 WAMP_USER="API_Controller_1"
