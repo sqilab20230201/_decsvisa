@@ -261,6 +261,10 @@ If you are unsure of the arguments of returned record types, the 'diagnostic' ut
 
 ![rRPC diagnostic](./img/rRPC_diagnostic.jpg)
 
+
+**Note: If running with oi.DECS firmware =< 0.5.1, ingore the error "Error parsing response: Length of data record inconsistent with record type" when setting the magnet target. You will recieve this error because the data sent back from oi.DECS won't be handled correctly for firmware versions =< 0.5.1. The magnet target should still have been set. Check the oi.DECS GUI**
+
+
 ## Examples
 
 When running examples or tests it may be useful to increase the logging level.  This is set inside the `decs_visa_tools/base_logger.py` file
