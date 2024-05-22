@@ -1,5 +1,5 @@
 """
-Modle that implements the WAMP response parsing
+Module that implements the WAMP response parsing
 """
 from enum import IntEnum
 
@@ -88,7 +88,13 @@ def decs_response_parser(resp: CallResult) -> str:
         # and retrun magnet state responses until the API fix is implemented
         logger.debug("Parsing flat response: %s", str(resp.results))
         return str(resp.results[0])
-
+    if n_args == 9:
+        # Not all responses are consistent in the API - this will catch
+        # and retrun magnet state responses until the API fix is implemented
+        print(resp.results)
+        logger.debug("Parsing flat response: %s", str(resp.results))
+        return float(resp.results[0]), float(resp.results[1]), float(resp.results[2])
+    
     # For longer data records, the first data element
     # in the response results should be the record type
     data_record_type = int(resp.results[0])

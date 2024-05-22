@@ -5,6 +5,7 @@
 """
 
 import time
+from .base_logger import logger
 
 from .command_dictionary import Proteox_cmd_uri as cmd_uri
 
@@ -43,7 +44,7 @@ def decs_command_parser(cmd: str) -> tuple [str, list]:
     args = []
     # Given the cmd and the uri - decide how to process the information
     # to form the correct WAMP messages for DECS
-    if "temperature_control" in uri and uri.endswith(".setpoint"):
+    if "temperature_control" in uri and uri.endswith("setpoint"):
         # set_ command for temperature
         args.append(float(str(cmd_parts[1]).strip()))
         args.append(1)
@@ -69,7 +70,7 @@ def decs_command_parser(cmd: str) -> tuple [str, list]:
         # cmd_parts[1] should be a , delimited list
         cmd_args = (cmd_parts[1].strip()).split(',')
         try:
-            assert len(cmd_args) == 6, "Incorrect arguments to set field"
+            assert len(cmd_args) == 7, "Incorrect arguments to set field"
         except AssertionError as e:
             raise ValueError(e) from e
         args.append(int(cmd_args[0].strip('[')))
@@ -77,22 +78,28 @@ def decs_command_parser(cmd: str) -> tuple [str, list]:
         args.append(float(cmd_args[2]))
         args.append(float(cmd_args[3]))
         args.append(int(cmd_args[4]))
-        args.append(float(cmd_args[5].strip(']')))
-        args.append(False)
+        args.append(float(cmd_args[5]))
+        if cmd_args[6].strip(']') == 'true':
+            args.append(True)
+        elif cmd_args[6].strip(']') == 'false':
+            args.append(False)
     elif "magnetic_field_control" in uri and uri.endswith("set_output_current_target"):
         # set_ command for psu current setpoint
         # cmd_parts[1] should be a , delimited list
         cmd_args = (cmd_parts[1].strip()).split(',')
         try:
-            assert len(cmd_args) == 5, "Incorrect arguments to set current"
+            assert len(cmd_args) == 6, "Incorrect arguments to set current"
         except AssertionError as e:
             raise ValueError(e) from e
         args.append(float(cmd_args[0].strip('[')))
         args.append(float(cmd_args[1]))
         args.append(float(cmd_args[2]))
         args.append(int(cmd_args[3]))
-        args.append(float(cmd_args[4].strip(']')))
-        args.append(False)
+        args.append(float(cmd_args[4]))
+        if cmd_args[5].strip(']') == 'true':
+            args.append(True)
+        elif cmd_args[5].strip(']') == 'false':
+            args.append(False)
     elif "magnetic_field_control" in uri and uri.endswith("set_state"):
         args.append((int(str(cmd_parts[1]).strip())))
     elif "PUBLISH" in cmd:

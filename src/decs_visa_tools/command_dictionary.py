@@ -24,8 +24,11 @@ oi:DECS system types
 #   in a straightforward way in QCoDeS.
 
 Proteox_cmd_uri = {
+    "get_SAMPLE_T"      : "oi.decs.temperature_control.DRI_MIX_CL.DRI_MIX_S.temperature",
+    "set_SAMPLE_T"      : "oi.decs.temperature_control.DRI_MIX_CL.setpoint",
     "get_MC_T"          : "oi.decs.temperature_control.DRI_MIX_CL.DRI_MIX_S.temperature",
     "set_MC_T"          : "oi.decs.temperature_control.DRI_MIX_CL.setpoint",
+    "get_MC_T_SP"       : "oi.decs.temperature_control.DRI_MIX_CL.setpoint",
     "get_MC_H"          : "oi.decs.temperature_control.DRI_MIX_CL.DRI_MIX_H.power",
     "set_MC_H"          : "oi.decs.temperature_control.DRI_MIX_CL.DRI_MIX_H.power",
     "set_MC_H_OFF"      : "oi.decs.temperature_control.DRI_MIX_CL.DRI_MIX_H.power",
@@ -58,6 +61,7 @@ Proteox_cmd_uri = {
     "set_MAG_Z_STATE"   : "oi.decs.magnetic_field_control.VRM_01.MAG_Z.set_state",
     "get_MAG_CURR_VEC"  : "oi.decs.magnetic_field_control.VRM_01.current_vector",
     "set_CURR_TARGET"   : "oi.decs.magnetic_field_control.VRM_01.set_output_current_target",
+    "get_CURR_TARGET"   : "oi.decs.magnetic_field_control.VRM_01.output_current_target",
     "PUBLISH"           : "oi.decs.proteox.eventlog",
     "get_a_WAMP_error"  : "oi.decs.THIS_WONT_WORK", # used for testing only
     "set_a_WAMP_error"  : "oi.decs.THIS_WONT_WORK"

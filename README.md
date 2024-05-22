@@ -227,6 +227,10 @@ The command requires a payload containing the desired temperature control setpoi
 
 **NB** the necessary arguments for a WAMP message to set this setpoint *and* enable the heater output would be `oi.decs.temperature_control.DRI_MIX_CL.setpoint[0.015, 1]` - the additional argument here is added automatically by the command_parser.
 
+Example for setting a field target: `set_MAG_TARGET:0,0,0,1,20,0.2,false`
+
+**NB** when using the command `set_MAG_TARGET` you will recieve the error `Error parsing response: Length of data record inconsistent with record type`. This error can be ignored, the field target will have been set. Check the oi.DECS GUI to confirm. 
+
 ### The response parser
 
 On successful return of a WAMP message, the wamp_component passes the returned response (generally a list of values) to the 'response_parser'.

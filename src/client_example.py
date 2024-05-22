@@ -36,6 +36,9 @@ def main():
     # define the connection, and configure
     decs_visa = rm.open_resource(pyvisa_connection)
 
+    # Note: When running on Windows, outputs from DECS<->VISA are stored in a decs_visa.log file which will be created in your working directory.
+    # Check this file if connection between DECS<->VISA and oi.DECS is not established.
+
     decs_visa.read_termination = WRITE_DELIM # server write == client read
     decs_visa.write_termination = READ_DELIM # server read == client write
     decs_visa.chunk_size = 204800
