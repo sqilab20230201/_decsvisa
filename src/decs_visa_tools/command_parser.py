@@ -79,9 +79,9 @@ def decs_command_parser(cmd: str) -> tuple [str, list]:
         args.append(float(cmd_args[3]))
         args.append(int(cmd_args[4]))
         args.append(float(cmd_args[5]))
-        if cmd_args[6].strip(']') == 'true':
+        if cmd_args[6].strip(']') == 'true' or cmd_args[6].strip(']') == ' True':
             args.append(True)
-        elif cmd_args[6].strip(']') == 'false':
+        elif cmd_args[6].strip(']') == 'false' or cmd_args[6].strip(']') == ' False':
             args.append(False)
     elif "magnetic_field_control" in uri and uri.endswith("set_output_current_target"):
         # set_ command for psu current setpoint
@@ -96,9 +96,9 @@ def decs_command_parser(cmd: str) -> tuple [str, list]:
         args.append(float(cmd_args[2]))
         args.append(int(cmd_args[3]))
         args.append(float(cmd_args[4]))
-        if cmd_args[5].strip(']') == 'true':
+        if cmd_args[5].strip(']') == 'true' or cmd_args[5].strip(']') == ' True':
             args.append(True)
-        elif cmd_args[5].strip(']') == 'false':
+        elif cmd_args[5].strip(']') == 'false' or cmd_args[5].strip(']') == ' False':
             args.append(False)
     elif "magnetic_field_control" in uri and uri.endswith("set_state"):
         args.append((int(str(cmd_parts[1]).strip())))
