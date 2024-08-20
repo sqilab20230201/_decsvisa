@@ -115,5 +115,7 @@ if __name__ == "__main__":
         print("Python version not compatible")
         print(f"System is running: Major: {version_info.major}; Minor: {version_info.minor}")
         print(f"Minimum requirements: Major: {PYTHON_MIN_MAJOR}; Minor: { PYTHON_MIN_MINOR}")
+        print(f"Forced run")
+        main()
     else:
         main()
