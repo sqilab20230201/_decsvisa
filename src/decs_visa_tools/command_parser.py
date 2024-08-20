@@ -23,7 +23,7 @@ def decs_request_parser(cmd: str) -> str:
     # if the uri is found, it can be returned
     return uri
 
-def decs_command_parser(cmd: str) -> tuple [str, list]:
+def decs_command_parser(cmd: str) -> tuple:
     """
     From the cmd string passed to the socket server, determine the correct
     WAMP uri to call/publish and package the arguments to suit
