@@ -108,38 +108,37 @@ def decs_response_parser(resp: CallResult) -> str:
 
     # match the record type (requires python >= 3.10)
     try:
-        match data_record_type:
-            case  OIRecordType.TEMPERATURE \
-                | OIRecordType.PRESSURE \
-                | OIRecordType.MASS_FLOW \
-                | OIRecordType.VOLUME_FLOW \
-                | OIRecordType.MAG_FIELD \
-                | OIRecordType.CURRENT \
-                | OIRecordType.VOLTAGE \
-                | OIRecordType.POWER \
-                | OIRecordType.FREQUENCY \
-                | OIRecordType.RESISTANCE \
-                | OIRecordType.SPEED:
-                assert n_args == 6, "Length of data record inconsistent with record type"
-                return str(resp.results[4])
-            case  OIRecordType.CONTROL_LOOP \
-                | OIRecordType.ANGULAR_POS \
-                | OIRecordType.SW_STATE:
-                assert n_args == 7, "Length of data record inconsistent with record type"
-                return str(resp.results[4])
-            case  OIRecordType.HTR_POWER:
-                assert n_args == 8, "Length of data record inconsistent with record type"
-                return str(resp.results[4])
-            case  OIRecordType.MAG_FIELD_VEC \
-                | OIRecordType.PSU_CURRENT_VEC:
-                assert n_args == 8, "Length of data record inconsistent with record type"
-                return float(resp.results[4]), float(resp.results[5]), float(resp.results[6])
-            case  OIRecordType.PRES_CONTROL_LOOP:
-                assert n_args == 11, "Length of data record inconsistent with record type"
-                return str(resp.results[5])
-            case _:
-                # Shouldn't have gotten to here
-                raise NotImplementedError(f"Unable to match data record type: {str(data_record_type)}")
+        if data_record_type == OIRecordType.TEMPERATURE or \
+                data_record_type == OIRecordType.PRESSURE or \
+                data_record_type == OIRecordType.MASS_FLOW or \
+                data_record_type == OIRecordType.VOLUME_FLOW or \
+                data_record_type == OIRecordType.MAG_FIELD or \
+                data_record_type == OIRecordType.CURRENT or \
+                data_record_type == OIRecordType.VOLTAGE or \
+                data_record_type == OIRecordType.POWER or \
+                data_record_type == OIRecordType.FREQUENCY or \
+                data_record_type == OIRecordType.RESISTANCE or \
+                data_record_type == OIRecordType.SPEED:
+            assert n_args == 6, "Length of data record inconsistent with record type"
+            return str(resp.results[4])
+        elif data_record_type == OIRecordType.CONTROL_LOOP or\
+                data_record_type == OIRecordType.ANGULAR_POS or\
+                data_record_type == OIRecordType.SW_STATE:
+            assert n_args == 7, "Length of data record inconsistent with record type"
+            return str(resp.results[4])
+        elif data_record_type == OIRecordType.HTR_POWER:
+            assert n_args == 8, "Length of data record inconsistent with record type"
+            return str(resp.results[4])
+        elif data_record_type == OIRecordType.MAG_FIELD_VEC or \
+                data_record_type == OIRecordType.PSU_CURRENT_VEC:
+            assert n_args == 8, "Length of data record inconsistent with record type"
+            return float(resp.results[4]), float(resp.results[5]), float(resp.results[6])
+        elif data_record_type == OIRecordType.PRES_CONTROL_LOOP:
+            assert n_args == 11, "Length of data record inconsistent with record type"
+            return str(resp.results[5])
+        else:
+            # Shouldn't have gotten to here
+            raise NotImplementedError(f"Unable to match data record type: {str(data_record_type)}")
     except (AssertionError, NotImplementedError) as e:
         logger.info("Error parsing response: %s", e)
         return str(e)
