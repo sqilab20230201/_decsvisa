@@ -1,3 +1,4 @@
+import os
 """
 Utility module that holds some useful settings
 """
@@ -7,8 +8,11 @@ Utility module that holds some useful settings
 #############################################
 
 # path to the system settings .env file
-DOT_ENV_PATH = "./.env"
-#DOT_ENV_PATH = "../../src/qcodes_contrib_drivers/drivers/OxfordInstruments/_decsvisa/src/.env"
+# DOT_ENV_PATH = "./.env"
+current_file_path = os.path.dirname(os.path.abspath(__file__))
+parent_directory = os.path.dirname(current_file_path)
+DOT_ENV_PATH = os.path.normcase(".env")
+DOT_ENV_PATH = os.path.join(parent_directory, DOT_ENV_PATH)
 
 # NB this can also be an
 # /absolute/path/to/file/.env
