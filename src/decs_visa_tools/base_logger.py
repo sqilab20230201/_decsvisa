@@ -9,7 +9,7 @@ import platform
 logger = logging.getLogger(__name__)
 
 # Log everything / something
-#logger.setLevel(logging.DEBUG)
+# logger.setLevel(logging.DEBUG)
 logger.setLevel(logging.INFO)
 
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
