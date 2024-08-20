@@ -18,7 +18,10 @@ def parse_data(data: str) -> str:
     Utility function to strip off the delimiter
     from messages recieved by the server 
     """
-    return data.removesuffix(READ_DELIM)
+    if data.endswith('\n'):
+        return data[:-1]
+    else:
+        return data
 
 def format_message(resp: str) -> bytes:
     """
