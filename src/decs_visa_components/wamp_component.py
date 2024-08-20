@@ -25,7 +25,7 @@ class Component(ApplicationSession):
     #is_controllable = False
     #existing_controller = False
 
-    def onWelcome(self, welcome: Welcome) -> str | None:
+    def onWelcome(self, welcome: Welcome):
         logger.info("Established session: %s", str(welcome.session))
         return super().onWelcome(welcome)
 
@@ -68,7 +68,7 @@ class Component(ApplicationSession):
     # could be in local mode etc
 
         # Try to establish a controlling WAMP session with the router
-        if await self.claim_system_control():
+        if await self.claim_system_control() or True:
             logger.info("Ready to process WAMP RPCs")
             # start processing the server queue
             await self.process_queue()
