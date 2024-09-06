@@ -5,6 +5,8 @@
 """
 
 import time
+import typing 
+
 from .base_logger import logger
 
 from .command_dictionary import Proteox_cmd_uri as cmd_uri
@@ -41,6 +43,7 @@ def decs_command_parser(cmd: str) -> tuple [str, list]:
         assert isinstance(uri, str), "uri not returned from cmd_dict"
     except AssertionError as e:
         raise ValueError(e) from e
+    args: list[typing.Any]
     args = []
     # Given the cmd and the uri - decide how to process the information
     # to form the correct WAMP messages for DECS
