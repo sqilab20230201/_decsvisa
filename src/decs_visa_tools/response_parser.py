@@ -93,7 +93,7 @@ def decs_response_parser(resp: CallResult) -> str:
         # and retrun magnet state responses until the API fix is implemented
         print(resp.results)
         logger.debug("Parsing flat response: %s", str(resp.results))
-        return float(resp.results[0]), float(resp.results[1]), float(resp.results[2])
+        return str(resp.results[0]), str(resp.results[1]), str(resp.results[2])
     
     # For longer data records, the first data element
     # in the response results should be the record type
@@ -133,7 +133,7 @@ def decs_response_parser(resp: CallResult) -> str:
             case  OIRecordType.MAG_FIELD_VEC \
                 | OIRecordType.PSU_CURRENT_VEC:
                 assert n_args == 8, "Length of data record inconsistent with record type"
-                return float(resp.results[4]), float(resp.results[5]), float(resp.results[6])
+                return str(resp.results[4]), str(resp.results[5]), str(resp.results[6])
             case  OIRecordType.PRES_CONTROL_LOOP:
                 assert n_args == 11, "Length of data record inconsistent with record type"
                 return str(resp.results[5])
