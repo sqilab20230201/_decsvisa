@@ -22,7 +22,7 @@ IPC between the WAMP component and the socket server is handled by python `queue
 
 When the socket server reads a message it is put onto a queue.  The WAMP component continuously attempts to read from this queue with `.get_nowait()` which will throw if it would block (queue empty) - this keeps the WAMP component alive.
 
-Once a message arrives on the queue, the WAMP rRPC is processed as usual, and the response placed onto an output queue, to the read by the socket server, as the reply.  The socket server just blocks on this output queue read whilst the WAMP processing occurs.
+Once a message arrives on the queue, the WAMP rRPC is processed as usual, and the response placed onto an output queue, to be read by the socket server, as the reply.  The socket server just blocks on this output queue read whilst the WAMP processing occurs.
 
 ## Setup
 
