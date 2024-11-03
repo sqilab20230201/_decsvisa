@@ -3,6 +3,7 @@ The WAMP portion of the DECS<->VISA implementation
 """
 import asyncio
 import queue
+import typing
 
 from autobahn.asyncio.wamp import ApplicationSession
 from autobahn.wamp import exception as wamp_exceptions
@@ -99,7 +100,7 @@ class Component(ApplicationSession):
         logger.info("Stopping WAMP event_loop")
         asyncio.get_event_loop().stop()
 
-    def package_plain_response(self, value: any) -> CallResult:
+    def package_plain_response(self, value: typing.Any) -> CallResult:
         """
         Short function to work around a WAMP (non?)feature that
         allows 'simple' responses to be flattened aspassed back
@@ -221,7 +222,7 @@ class Component(ApplicationSession):
                             resp = await self.checked_rpc_args(rpc_uri, args)
                             # Determine what is returned
                             r.put(decs_response_parser(resp))
-                        except Exception:
+                        except Exception as e:
                             logger.info("WAMP error: %s", e)
                             # This is a WAMP level error - probably
                             # nothing we can do to fix this, so
@@ -266,7 +267,7 @@ class Component(ApplicationSession):
                             # can just assume this has publication has
                             # been made
                             r.put("PUBLISHED")
-                        except Exception:
+                        except Exception as e:
                             logger.info("WAMP error: %s", e)
                             # This is a WAMP level error - probably
                             # nothing we can do to fix this, so
