@@ -69,7 +69,7 @@ class Component(ApplicationSession):
     # could be in local mode etc
 
         # Try to establish a controlling WAMP session with the router
-        if await self.claim_system_control() or True:
+        if await self.claim_system_control():
             logger.info("Ready to process WAMP RPCs")
             # start processing the server queue
             await self.process_queue()
