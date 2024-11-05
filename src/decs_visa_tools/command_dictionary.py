@@ -23,7 +23,6 @@ oi:DECS system types
 #   And a version of a *IDN? command is implemented to allow and oi:DECS driver to be implemented
 #   in a straightforward way in QCoDeS.
 
-Proteox_cmd_uri:  dict[str, str]
 Proteox_cmd_uri = {
     "get_SAMPLE_T"      : "oi.decs.temperature_control.DRI_MIX_CL.DRI_MIX_S.temperature",
     "set_SAMPLE_T"      : "oi.decs.temperature_control.DRI_MIX_CL.setpoint",
@@ -68,12 +67,12 @@ Proteox_cmd_uri = {
     "set_a_WAMP_error"  : "oi.decs.THIS_WONT_WORK"
 }
 
-Teslatron_cmd_uri:  dict[str, str]
+
 Teslatron_cmd_uri = {
     # coming soon...
 }
 
-someOtherSystemType:  dict[str, str]
+
 someOtherSystemType = {
     # Implement other/further cmd_dict(s) as required
     "short_cmd"         : "wamp.uri"

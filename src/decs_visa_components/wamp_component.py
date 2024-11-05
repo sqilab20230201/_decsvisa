@@ -3,7 +3,6 @@ The WAMP portion of the DECS<->VISA implementation
 """
 import asyncio
 import queue
-import typing
 
 from autobahn.asyncio.wamp import ApplicationSession
 from autobahn.wamp import exception as wamp_exceptions
@@ -44,6 +43,7 @@ class Component(ApplicationSession):
         logger.info("Starting WAMP-CRA authentication on realm '%s' as user '%s'",
                     self.config.realm, user)
         user_secret=self.config.extra['user_secret']
+        print(f"user_secret: {user_secret}")
         if challenge.method == "wampcra":
             logger.debug("WAMP-CRA challenge received: %s", challenge)
             if 'salt' in challenge.extra:
@@ -100,7 +100,7 @@ class Component(ApplicationSession):
         logger.info("Stopping WAMP event_loop")
         asyncio.get_event_loop().stop()
 
-    def package_plain_response(self, value: typing.Any) -> CallResult:
+    def package_plain_response(self, value: any) -> CallResult:
         """
         Short function to work around a WAMP (non?)feature that
         allows 'simple' responses to be flattened aspassed back
@@ -222,7 +222,7 @@ class Component(ApplicationSession):
                             resp = await self.checked_rpc_args(rpc_uri, args)
                             # Determine what is returned
                             r.put(decs_response_parser(resp))
-                        except Exception as e:
+                        except Exception:
                             logger.info("WAMP error: %s", e)
                             # This is a WAMP level error - probably
                             # nothing we can do to fix this, so
@@ -267,7 +267,7 @@ class Component(ApplicationSession):
                             # can just assume this has publication has
                             # been made
                             r.put("PUBLISHED")
-                        except Exception as e:
+                        except Exception:
                             logger.info("WAMP error: %s", e)
                             # This is a WAMP level error - probably
                             # nothing we can do to fix this, so

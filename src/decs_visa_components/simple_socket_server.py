@@ -76,7 +76,6 @@ def simple_server(interface: str, server_port: int, q: queue.Queue, r: queue.Que
             with conn:
                 logger.info("Server connection: %s", str(addr))
                 while can_run:
-                    data: str | None
                     data = ""
                     # Read one command at a time...
                     while not data.endswith(READ_DELIM):

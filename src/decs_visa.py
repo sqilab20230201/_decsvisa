@@ -33,6 +33,7 @@ def main():
     logger.info('DECS<->VISA start up')
 
     # Read in user / router / server details
+    print(f"load_dotenv from: {DOT_ENV_PATH}")
     load_dotenv(DOT_ENV_PATH, verbose=True)
     # there isn't really much in the way of useful error reporting
     # from load_dotenv, so check that something was read after this
