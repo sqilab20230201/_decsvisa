@@ -225,9 +225,11 @@ For example, a short command to set the mixing chamber temperature control set-p
 
 The command requires a payload containing the desired temperature control setpoint, and so a valid command to send to the socket server would be: `set_MC_T:0.015`
 
-**NB** the necessary arguments for a WAMP message to set this setpoint *and* enable the heater output would be `oi.decs.temperature_control.DRI_MIX_CL.setpoint[0.015, 1]` - the additional argument here is added automatically by the command_parser.
+The arguments required for set commands are detailed in the Proteox Manual. See *Appendix D: Proteox API (WAMP and endpoints)*. Only a subset of the available API endpoints are exposed in this DECS-VISA application. Additional endpoints can be added to `command_dictionary.py`. 
 
-The arguments required for set commands are detailed in the Proteox Manual. See *Appendix D: Proteox API (WAMP and endpoints)*. Only a subset of the available API endpoints are exposed in this DECS-VISA application. Additional endpoints can be added to the command dictionary. Example for setting a field target: `set_MAG_TARGET:0,0,0,1,20,0.2,false`
+Example for setting a field target: `set_MAG_TARGET:0,0,0,1,20,0.2,false`
+
+**NB** the necessary arguments for a WAMP message to set this setpoint *and* enable the heater output would be `oi.decs.temperature_control.DRI_MIX_CL.setpoint[0.015, 1]` - the additional argument here is added automatically by the command_parser.
 
 **NB** when using the command `set_MAG_TARGET` you will recieve the error `Error parsing response: Length of data record inconsistent with record type`. This error can be ignored, the field target will have been set. Check the oi.DECS GUI to confirm. 
 
