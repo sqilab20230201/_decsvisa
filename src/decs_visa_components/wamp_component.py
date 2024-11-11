@@ -43,7 +43,6 @@ class Component(ApplicationSession):
         logger.info("Starting WAMP-CRA authentication on realm '%s' as user '%s'",
                     self.config.realm, user)
         user_secret=self.config.extra['user_secret']
-        print(f"user_secret: {user_secret}")
         if challenge.method == "wampcra":
             logger.debug("WAMP-CRA challenge received: %s", challenge)
             if 'salt' in challenge.extra:
